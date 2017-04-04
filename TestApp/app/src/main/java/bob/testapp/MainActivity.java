@@ -46,13 +46,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void sendMessage(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-    }
+
 
     @Override
     public void onBackPressed() {
@@ -96,6 +90,8 @@ public class MainActivity extends AppCompatActivity
             // Handle the view action
 
         } else if (id == R.id.nav_maps) {
+            Intent i = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
 
