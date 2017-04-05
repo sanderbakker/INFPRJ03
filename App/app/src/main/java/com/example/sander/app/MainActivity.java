@@ -15,6 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.vision.Frame;
+
+import static com.example.sander.app.R.id.map;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,6 +40,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        FragmentManager FragmentManager = getFragmentManager();
+        FragmentManager.beginTransaction().replace(R.id.content_frame, new MainFrame()).commit();
+
+
+
     }
 
     @Override
@@ -73,14 +84,18 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentManager FragementManager = getFragmentManager();
+        FragmentManager FragmentManager = getFragmentManager();
         if (id == R.id.nav_home) {
             //moet veranderd worden
-            Intent i = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(i);
+            //Intent i = new Intent(MainActivity.this, MainActivity.class);
+            //startActivity(i);
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new MainFrame()).commit();
         } else if (id == R.id.nav_maps) {
             // Adds the frame when pressing the maps button
-            FragementManager.beginTransaction().replace(R.id.content_frame, new GoogleMaps()).commit();
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new GoogleMaps()).commit();
+        }
+        else if(id == R.id.nav_view){
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new CardViewFrame()).commit();
         }
 
           else if (id == R.id.nav_share) {
