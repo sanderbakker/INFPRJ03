@@ -34,7 +34,7 @@ public class RecycleFrame extends Fragment {
 
         RecyclerView VRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         VRecyclerView.setHasFixedSize(true);
-        RecycleAdapter adapter = new RecycleAdapter(new String[]{"Example One", "Example Two", "Example Three", "Example Four", "Example Five" , "Example Six" , "Example Seven", "Example Eight"});
+        RecycleAdapter adapter = new RecycleAdapter(new String[]{"Example One"});
         VRecyclerView.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
