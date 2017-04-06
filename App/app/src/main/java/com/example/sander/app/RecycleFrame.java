@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 /**
@@ -31,13 +32,13 @@ public class RecycleFrame extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_recycle, container, false);
 
-        RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
-        rv.setHasFixedSize(true);
+        RecyclerView VRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
+        VRecyclerView.setHasFixedSize(true);
         RecycleAdapter adapter = new RecycleAdapter(new String[]{"Example One", "Example Two", "Example Three", "Example Four", "Example Five" , "Example Six" , "Example Seven", "Example Eight"});
-        rv.setAdapter(adapter);
+        VRecyclerView.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        rv.setLayoutManager(llm);
+        VRecyclerView.setLayoutManager(llm);
 
         return rootView;
     }
