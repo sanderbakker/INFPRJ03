@@ -10,13 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sander on 6-4-2017.
  */
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> {
     private String[] mDataset;
-
+    ArrayList<String> ArrayDataset;
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public CardView mCardView;
         public TextView mTextView;
@@ -30,8 +32,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
     }
 
-    public RecycleAdapter(String[] myDataset){
-        mDataset = myDataset;
+    public RecycleAdapter(ArrayList<String> names){
+        ArrayDataset = names;
     }
 
     @Override
@@ -43,9 +45,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
-        holder.mTextView.setText(mDataset[position]);
+        holder.mTextView.setText(ArrayDataset.get(position));
     }
 
     @Override
-    public int getItemCount() { return mDataset.length; }
+    public int getItemCount() { return ArrayDataset.size(); }
 }

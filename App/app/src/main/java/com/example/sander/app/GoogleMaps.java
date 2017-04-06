@@ -19,6 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.Manifest;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -29,21 +35,57 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 
 public class GoogleMaps extends Fragment implements OnMapReadyCallback {
+    ArrayList<String> list = new ArrayList<>();
+    ArrayList<Double> latitude = new ArrayList<>();
+    ArrayList<Double> longitude = new ArrayList<>();
+    public GoogleMaps(){
 
-
+    }
     @Nullable
     @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_gmaps, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String url= "http://test.dontstealmywag.ga/api/parkgarage.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Do something with the response
+                        try{
+                            JSONObject o = new JSONObject(response);
+                            JSONArray values=o.getJSONArray("parkgarage");
+                            for ( int i=0; i< values.length(); i++) {
+                                JSONObject jsonObject = values.getJSONObject(i);
+                                list.add(jsonObject.getString("parkgarage_name"));
+                                longitude.add(jsonObject.getDouble("langitude"));
+                                latitude.add(jsonObject.getDouble("longitude"));
+                            }
+                        }  catch (JSONException ex){}
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                    }
+                });
+        rq.add(stringRequest);
         super.onViewCreated(view, savedInstanceState);
 
         MapView mapView = (MapView) view.findViewById(R.id.map);
@@ -62,25 +104,15 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(getContext(), Locale.getDefault());
-
         LatLng marker = new LatLng(51.9244201, 4.4777325);
-
+        for(Integer i = 0; i < list.size(); i++){
+            googleMap.addMarker(new MarkerOptions().title(list.get(i)).position(new LatLng(longitude.get(i), latitude.get(i))));
+        }
+        googleMap.addMarker(new MarkerOptions().title("Testing").position(marker));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 12));
-
-        googleMap.addMarker(new MarkerOptions().title("Testing").position(new LatLng(53.92, 4.47)));
-        googleMap.addMarker(new MarkerOptions().title("Hello Google Maps!").position(marker));
+        //googleMap.addMarker(new MarkerOptions().title(list.get(1)).position(marker));
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         googleMap.setMyLocationEnabled(true);
@@ -88,4 +120,10 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
     }
-}
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+    }
+
