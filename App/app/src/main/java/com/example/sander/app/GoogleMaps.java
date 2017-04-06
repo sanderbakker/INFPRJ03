@@ -8,6 +8,8 @@ import android.app.Fragment;
 
 import android.app.Fragment;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -27,7 +29,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
+import java.util.List;
+import java.util.Locale;
 
 
 public class GoogleMaps extends Fragment implements OnMapReadyCallback {
@@ -59,6 +62,9 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(getContext(), Locale.getDefault());
 
         LatLng marker = new LatLng(51.9244201, 4.4777325);
 
