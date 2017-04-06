@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
             FragmentManager.beginTransaction().replace(R.id.content_frame, new GoogleMaps()).commit();
         }
         else if(id == R.id.nav_view){
-            FragmentManager.beginTransaction().replace(R.id.content_frame, new CardViewFrame()).commit();
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new RecycleFrame()).commit();
         }
 
           else if (id == R.id.nav_share) {
