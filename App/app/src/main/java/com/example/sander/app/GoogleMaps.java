@@ -60,32 +60,6 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url= "http://test.dontstealmywag.ga/api/parkgarage.php";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Do something with the response
-                        try{
-                            JSONObject o = new JSONObject(response);
-                            JSONArray values=o.getJSONArray("parkgarage");
-                            for ( int i=0; i< values.length(); i++) {
-                                JSONObject jsonObject = values.getJSONObject(i);
-                                list.add(jsonObject.getString("parkgarage_name"));
-                                longitude.add(jsonObject.getDouble("langitude"));
-                                latitude.add(jsonObject.getDouble("longitude"));
-                            }
-                        }  catch (JSONException ex){}
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle error
-                    }
-                });
-        rq.add(stringRequest);
         super.onViewCreated(view, savedInstanceState);
 
         MapView mapView = (MapView) view.findViewById(R.id.map);
@@ -103,15 +77,39 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        LatLng marker = new LatLng(51.9244201, 4.4777325);
-        for(Integer i = 0; i < list.size(); i++){
-            googleMap.addMarker(new MarkerOptions().title(list.get(i)).position(new LatLng(longitude.get(i), latitude.get(i))));
-        }
-        googleMap.addMarker(new MarkerOptions().title("Testing").position(marker));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 12));
-        //googleMap.addMarker(new MarkerOptions().title(list.get(1)).position(marker));
+    public void onMapReady(final GoogleMap googleMap) {
 
+        RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String url= "http://test.dontstealmywag.ga/api/parkgarage.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Do something with the response
+                        try{
+                            JSONObject o = new JSONObject(response);
+                            JSONArray values=o.getJSONArray("parkgarage");
+                            for ( int i=0; i< values.length(); i++) {
+                                JSONObject jsonObject = values.getJSONObject(i);
+                                list.add(jsonObject.getString("parkgarage_name"));
+                                longitude.add(jsonObject.getDouble("langitude"));
+                                latitude.add(jsonObject.getDouble("longitude"));
+                            }
+                        }  catch (JSONException ex){}
+                        for(Integer i = 0; i < list.size(); i++){
+                            googleMap.addMarker(new MarkerOptions().title(list.get(i)).position(new LatLng(longitude.get(i), latitude.get(i))));
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                    }
+                });
+        rq.add(stringRequest);
+        LatLng marker = new LatLng(51.9244201, 4.4777325);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 12));
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }

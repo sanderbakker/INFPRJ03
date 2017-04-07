@@ -46,16 +46,38 @@ public class RecycleFrame extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recycle, container, false);
-        RecyclerView VRecyclerView = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
-        names.add("Onzin");
-        names.add("Het is erg vaag");
-        VRecyclerView.setHasFixedSize(true);
-        RecycleAdapter adapter = new RecycleAdapter(names);
-        VRecyclerView.setAdapter(adapter);
+        final RecyclerView VRecyclerView = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
+        RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String url= "http://test.dontstealmywag.ga/api/parkgarage.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Do something with the response
+                        try{
+                            JSONObject o = new JSONObject(response);
+                            JSONArray values=o.getJSONArray("parkgarage");
+                            for ( int i=0; i< values.length(); i++) {
+                                JSONObject jsonObject = values.getJSONObject(i);
+                                names.add(jsonObject.getString("parkgarage_name"));
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        VRecyclerView.setLayoutManager(llm);
 
+                            }
+                        }  catch (JSONException ex){}
+                        VRecyclerView.setHasFixedSize(true);
+                        RecycleAdapter adapter = new RecycleAdapter(names);
+                        VRecyclerView.setAdapter(adapter);
+                        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                        VRecyclerView.setLayoutManager(llm);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                    }
+                });
+        rq.add(stringRequest);
         return view;
     }
 }
