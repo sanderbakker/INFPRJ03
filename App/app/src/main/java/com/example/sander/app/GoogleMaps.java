@@ -80,7 +80,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
     public void onMapReady(final GoogleMap googleMap) {
 
         RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url= "http://test.dontstealmywag.ga/api/parkgarage.php";
+        String url= "http://test.dontstealmywag.ga/api/parkgarage_all.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -88,7 +88,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
                         // Do something with the response
                         try{
                             JSONObject o = new JSONObject(response);
-                            JSONArray values=o.getJSONArray("parkgarage");
+                            JSONArray values=o.getJSONArray("");
                             for ( int i=0; i< values.length(); i++) {
                                 JSONObject jsonObject = values.getJSONObject(i);
                                 list.add(jsonObject.getString("parkgarage_name"));
