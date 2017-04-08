@@ -40,6 +40,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,6 +50,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
     ArrayList<String> list = new ArrayList<>();
     ArrayList<Double> latitude = new ArrayList<>();
     ArrayList<Double> longitude = new ArrayList<>();
+
     public GoogleMaps(){
 
     }
@@ -94,6 +97,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
                                 list.add(jsonObject.getString("parkgarage_name"));
                                 longitude.add(jsonObject.getDouble("langitude"));
                                 latitude.add(jsonObject.getDouble("longitude"));
+
                             }
                         }  catch (JSONException ex){}
                         for(Integer i = 0; i < list.size(); i++){

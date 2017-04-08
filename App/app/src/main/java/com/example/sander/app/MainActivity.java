@@ -35,7 +35,9 @@ import java.util.HashMap;
 import static com.example.sander.app.R.id.map;
 
 public class MainActivity extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +102,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentManager FragmentManager = getFragmentManager();
         if (id == R.id.nav_home) {
-            //moet veranderd worden
             //Intent i = new Intent(MainActivity.this, MainActivity.class);
             //startActivity(i);
             FragmentManager.beginTransaction().replace(R.id.content_frame, new MainFrame()).commit();
@@ -111,10 +112,7 @@ public class MainActivity extends AppCompatActivity
         else if(id == R.id.nav_view){
             FragmentManager.beginTransaction().replace(R.id.content_frame, new RecycleFrame()).commit();
         }
-
-          else if (id == R.id.nav_share) {
-            FragmentManager.beginTransaction().replace(R.id.content_frame, new BlankFragment()).commit();
-        } else if (id == R.id.nav_send) {
+        else if(id == R.id.nav_graph){
 
         }
 
