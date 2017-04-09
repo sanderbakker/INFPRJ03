@@ -119,7 +119,7 @@ public class RecycleFrame extends Fragment {
                              Bundle savedInstanceState) {
         gps = new GPSTracker(getActivity());
         setHasOptionsMenu(true);
-        
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recycle, container, false);
         final RecyclerView VRecyclerView = (RecyclerView) view.findViewById(R.id.rv_recycler_view);

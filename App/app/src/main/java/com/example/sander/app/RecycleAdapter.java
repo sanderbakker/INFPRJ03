@@ -27,6 +27,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
     ArrayList<Data> ArrayData;
     GPSTracker gps;
+    Integer count_gps = 0;
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public CardView mCardView;
         public TextView TextViewNames;
@@ -35,6 +36,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         public TextView TextViewLatitude;
         public TextView TextViewDistance;
         public MyViewHolder(View v){
+
             super(v);
             Context context = v.getContext();
             gps = new GPSTracker(context);
@@ -68,8 +70,11 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
         }
         else{
-            holder.TextViewDistance.setText("Not available");
-            gps.showSettingsAlert();
+            holder.TextViewDistance.setText("Niet beschikbaar");
+            if (count_gps == 0) {
+                gps.showSettingsAlert();
+                count_gps += 1;
+            }
         }
         //holder.mImageView.setImageResource(R.drawable.ic_local_parking_black_24dp);
     }
