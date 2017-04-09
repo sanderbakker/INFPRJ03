@@ -3,6 +3,7 @@ package com.example.sander.app;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,7 +43,11 @@ public class RecycleFrame extends Fragment {
     ArrayList<String> code = new ArrayList<>();
     ArrayList<String> latitude = new ArrayList<>();
     ArrayList<String> longitude = new ArrayList<>();
-    boolean check = false;
+    GPSTracker gps;
+    ArrayList<Double> dLatitude = new ArrayList<>();
+    ArrayList<Double> dLongitude = new ArrayList<>();
+    ArrayList<Float> distance = new ArrayList<>();
+    ArrayList<Data> dataList = new ArrayList<>();
     public RecycleFrame() {
         // Required empty public constructor
     }
@@ -76,6 +82,12 @@ public class RecycleFrame extends Fragment {
             transaction.detach(this).attach(this).commit();
             return true;
         }
+        else if (id == R.id.short_distance){
+            Collections.sort(distance);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.detach(this).attach(this).commit();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
         }
 
@@ -100,17 +112,37 @@ public class RecycleFrame extends Fragment {
                                 for (int i = 0; i < values.length(); i++) {
 
                                     JSONObject jsonObject = values.getJSONObject(i);
+                                    //dataList.add(new Data(jsonObject.getString("parkgarage_name"), jsonObject.getString("charging_capcatity"), jsonObject.getDouble("langitude"),
+                                            //jsonObject.getDouble("longitude"), jsonObject.getString("parkgarage_code"), distance.get(i)));
                                     names.add(jsonObject.getString("parkgarage_name"));
                                     cPoints.add(jsonObject.getString("charging_capacity"));
                                     code.add(jsonObject.getString("parkgarage_code"));
                                     latitude.add(jsonObject.getString("langitude"));
                                     longitude.add(jsonObject.getString("longitude"));
-
+                                    dLatitude.add(jsonObject.getDouble("langitude"));
+                                    dLongitude.add(jsonObject.getDouble("longitude"));
                                 }
                             }
                         }  catch (JSONException ex){}
+                        gps = new GPSTracker(getActivity());
+                        //check if gps is on
+                        if(!gps.canGetLocation()){
+                            gps.showSettingsAlert();
+                        }
+                        Location myLocation = new Location("");
+                        myLocation.setLatitude(gps.getLatitude());
+                        myLocation.setLongitude(gps.getLongitude());
+                        for(int z = 0; z < latitude.size(); z++){
+                            Location parkingGarage = new Location("");
+                            parkingGarage.setLatitude(dLatitude.get(z));
+                            parkingGarage.setLongitude(dLongitude.get(z));
+                            distance.add(myLocation.distanceTo(parkingGarage)/1000);
+                        }
+
+
                         VRecyclerView.setHasFixedSize(true);
-                        RecycleAdapter adapter = new RecycleAdapter(names, cPoints, code, latitude, longitude);
+                        RecycleAdapter adapter = new RecycleAdapter(names, cPoints, code, latitude, longitude, distance);
+                        //RecycleAdapter adapter = new RecycleAdapter(dataList);
                         VRecyclerView.setAdapter(adapter);
                         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                         VRecyclerView.setLayoutManager(llm);

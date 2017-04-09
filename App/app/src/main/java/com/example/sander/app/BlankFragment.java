@@ -1,6 +1,7 @@
 package com.example.sander.app;
 
 import android.app.Fragment;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,46 +36,28 @@ public class BlankFragment extends Fragment{
     public BlankFragment() {
         // Required empty public constructor
     }
-    ArrayList<String> list = new ArrayList<>();
-    List<String> latitude = new ArrayList<>();
-    List<String> longitude = new ArrayList<>();
-    StringBuilder sb = new StringBuilder();
+    GPSTracker gps;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        gps = new GPSTracker(getActivity());
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+
+            // \n is for new line
+            Toast.makeText(getContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        }else{
+            gps.showSettingsAlert();
+        }
+
             View view = inflater.inflate(R.layout.fragment_blank, container, false);
             final TextView txt=  (TextView)view.findViewById(R.id.onzin);
-            RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
-            String url= "http://test.dontstealmywag.ga/api/parkgarage.php";
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Do something with the response
-                            try{
-                                JSONObject o = new JSONObject(response);
-                                JSONArray values=o.getJSONArray("parkgarage");
-                                for ( int i=0; i< values.length(); i++) {
-                                    JSONObject sonuc = values.getJSONObject(i);
-                                    list.add("Flight: " + sonuc.getString("parkgarage_name") + "\n");
-                                    //sb.append("name: " + sonuc.getString("longitude") + "\n\n");
-
-                                }
-
-                                txt.setText(list.get(0));
-
-
-                            }  catch (JSONException ex){}
-
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // Handle error
-                        }
-                    });
-            rq.add(stringRequest);
+            txt.setText(String.valueOf(gps.getLatitude()) + String.valueOf(gps.getLongitude()));
+            //txt.setText(String.valueOf(mLastLocation.getLatitude()));
             // Inflate the layout for this fragment
             return  view;
         }

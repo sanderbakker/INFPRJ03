@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.vision.Frame;
 
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity
             FragmentManager.beginTransaction().replace(R.id.content_frame, new RecycleFrame()).commit();
         }
         else if(id == R.id.nav_graph){
-
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new GraphFrame()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

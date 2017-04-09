@@ -28,12 +28,14 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     ArrayList<String> ArrayCode;
     ArrayList<String> ArrayLatitude;
     ArrayList<String> ArrayLongitude;
+    ArrayList<Float> ArrayDistance;
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public CardView mCardView;
         public TextView TextViewNames;
         public TextView TextViewCharging;
         public TextView TextViewCode;
         public TextView TextViewLatitude;
+        public TextView TextViewDistance;
         public ImageView mImageView;
         public MyViewHolder(View v){
             super(v);
@@ -42,16 +44,18 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
             TextViewCharging = (TextView) v.findViewById(R.id.text_view_charging);
             TextViewCode = (TextView) v.findViewById(R.id.text_view_code);
             TextViewLatitude = (TextView) v.findViewById(R.id.text_view_latitude);
-
+            TextViewDistance = (TextView) v.findViewById(R.id.text_view_distance);
         }
 
     }
-    public RecycleAdapter(ArrayList<String> names, ArrayList<String> cPoints, ArrayList<String> code, ArrayList<String> latitude, ArrayList<String> longitude){
+    public RecycleAdapter(ArrayList<String> names,
+                          ArrayList<String> cPoints, ArrayList<String> code, ArrayList<String> latitude, ArrayList<String> longitude, ArrayList<Float> distance){
         ArrayNames = names;
         ArrayCharging= cPoints;
         ArrayCode = code;
         ArrayLatitude = latitude;
         ArrayLongitude = longitude;
+        ArrayDistance = distance;
     }
     @Override
     public RecycleAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -65,6 +69,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         holder.TextViewCharging.setText("Oplaadpunten: " + ArrayCharging.get(position));
         holder.TextViewCode.setText("Code: " + ArrayCode.get(position));
         holder.TextViewLatitude.setText("Positie: (" + ArrayLatitude.get(position) + ", " + ArrayLongitude.get(position)+ ")");
+        holder.TextViewDistance.setText(String.valueOf(ArrayDistance.get(position)));
         //holder.mImageView.setImageResource(R.drawable.ic_local_parking_black_24dp);
     }
     @Override

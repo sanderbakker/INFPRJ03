@@ -11,4 +11,9 @@
         android:orderInCategory="100"
         android:title="Z-A"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/short_distance"
+        android:orderInCategory="100"
+        android:title="Dichtbij - Ver weg"
+        app:showAsAction="never" />
 </menu>
