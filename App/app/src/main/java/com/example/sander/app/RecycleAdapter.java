@@ -1,6 +1,7 @@
 package com.example.sander.app;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -25,7 +26,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
 
     ArrayList<Data> ArrayData;
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    GPSTracker gps;
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         public CardView mCardView;
         public TextView TextViewNames;
         public TextView TextViewCharging;
@@ -34,6 +36,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         public TextView TextViewDistance;
         public MyViewHolder(View v){
             super(v);
+            Context context = v.getContext();
+            gps = new GPSTracker(context);
             mCardView = (CardView) v.findViewById(R.id.card_view);
             TextViewNames = (TextView) v.findViewById(R.id.text_view_names);
             TextViewCharging = (TextView) v.findViewById(R.id.text_view_charging);
@@ -54,12 +58,19 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     }
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
+
         holder.TextViewNames.setText("Naam: " + String.valueOf(ArrayData.get(position).getNames()));
         holder.TextViewCharging.setText("Oplaadpunten: " + String.valueOf(ArrayData.get(position).getcPoints()));
         holder.TextViewCode.setText("Code: " + String.valueOf(ArrayData.get(position).getCode()));
         holder.TextViewLatitude.setText("Positie: (" + String.valueOf(ArrayData.get(position).getLatitude()) + ", " + String.valueOf(ArrayData.get(position).getLongitude())+ ")");
-        holder.TextViewDistance.setText(String.valueOf(ArrayData.get(position).getDistance()));
+        if(gps.canGetLocation()) {
+            holder.TextViewDistance.setText(String.valueOf(ArrayData.get(position).getDistance()) + " km");
 
+        }
+        else{
+            holder.TextViewDistance.setText("Not available");
+            gps.showSettingsAlert();
+        }
         //holder.mImageView.setImageResource(R.drawable.ic_local_parking_black_24dp);
     }
     @Override

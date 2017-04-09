@@ -31,23 +31,23 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Timer;
+
+import static android.R.attr.delay;
 
 /**
  * Created by Sander on 6-4-2017.
  */
 
 public class RecycleFrame extends Fragment {
-    ArrayList<String> names = new ArrayList<>();
-    ArrayList<String> cPoints = new ArrayList<>();
-    ArrayList<String> code = new ArrayList<>();
-    ArrayList<String> latitude = new ArrayList<>();
-    ArrayList<String> longitude = new ArrayList<>();
     GPSTracker gps;
     ArrayList<Double> dLatitude = new ArrayList<>();
     ArrayList<Double> dLongitude = new ArrayList<>();
     ArrayList<Float> distance = new ArrayList<>();
     ArrayList<Data> dataList = new ArrayList<>();
+    Timer timer;
     public RecycleFrame() {
         // Required empty public constructor
     }
@@ -63,39 +63,63 @@ public class RecycleFrame extends Fragment {
         inflater.inflate(R.menu.fragment_view, menu);
         super.onCreateOptionsMenu(menu,inflater);
     }
+    public void refreshFragment(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.detach(this).attach(this).commit();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Integer id = item.getItemId();
         if(id == R.id.action_A_Z){
             //Sorts the garages from A to Z
-            Collections.sort(dataList);
+
+            Collections.sort(dataList, new Comparator<Data>() {
+                @Override
+                public int compare(Data name1, Data name2) {
+                    return name1.getNames().compareTo(name2.getNames());
+                }
+            });
             //Refreshes the fragment
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.detach(this).attach(this).commit();
+            refreshFragment();
             return true;
         }
         else if(id == R.id.action_Z_A){
             //Sorts the garages from Z to A
-            Collections.reverse(names);
+            Collections.sort(dataList, new Comparator<Data>() {
+                @Override
+                public int compare(Data name1, Data name2) {
+                    return name2.getNames().compareTo(name1.getNames());
+                }
+            });
             //Refreshes the fragment
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.detach(this).attach(this).commit();
+            refreshFragment();
             return true;
         }
         else if (id == R.id.short_distance){
-            Collections.sort(distance);
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.detach(this).attach(this).commit();
+            Collections.sort(dataList, new Comparator<Data>() {
+                @Override
+                public int compare(Data distance1, Data distance2) {
+                    return distance1.getDistance().compareTo(distance2.getDistance());
+                }
+            });
+            refreshFragment();
             return true;
         }
-        return super.onOptionsItemSelected(item);
+
+        else if(id == R.id.refresh){
+            refreshFragment();
         }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         gps = new GPSTracker(getActivity());
         setHasOptionsMenu(true);
+        
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recycle, container, false);
         final RecyclerView VRecyclerView = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
@@ -109,30 +133,26 @@ public class RecycleFrame extends Fragment {
                         try{
                             JSONObject o = new JSONObject(response);
                             JSONArray values=o.getJSONArray("");
-                            if(names.size() == 0) {
+                            if(dataList.size() == 0) {
                                 for (int i = 0; i < values.length(); i++) {
-
                                     JSONObject jsonObject = values.getJSONObject(i);
 
-                                    //names.add(jsonObject.getString("parkgarage_name"));
-                                    //cPoints.add(jsonObject.getString("charging_capacity"));
-                                    //code.add(jsonObject.getString("parkgarage_code"));
-                                    //latitude.add(jsonObject.getString("langitude"));
-                                    //longitude.add(jsonObject.getString("longitude"));
-
-                                    //check if gps is on
-                                    if(!gps.canGetLocation()){
-                                        gps.showSettingsAlert();
-                                    }
+                                    // new location object
                                     Location myLocation = new Location("");
+                                    //gets data from current location
                                     myLocation.setLatitude(gps.getLatitude());
                                     myLocation.setLongitude(gps.getLongitude());
+                                    // creates list of lat long data
                                     dLatitude.add(jsonObject.getDouble("langitude"));
                                     dLongitude.add(jsonObject.getDouble("longitude"));
+                                    // creates new location object
                                     Location parkingGarage = new Location("");
+                                    //gets lat long from garage
                                     parkingGarage.setLatitude(dLatitude.get(i));
                                     parkingGarage.setLongitude(dLongitude.get(i));
+                                    //converts distance to KM
                                     distance.add(myLocation.distanceTo(parkingGarage)/1000);
+                                    //creates custom object with all required data
                                     dataList.add(new Data(jsonObject.getString("parkgarage_name"), jsonObject.getString("charging_capacity"), jsonObject.getDouble("langitude"),
                                             jsonObject.getDouble("longitude"), jsonObject.getString("parkgarage_code"), distance.get(i)));
                                 }
@@ -140,7 +160,6 @@ public class RecycleFrame extends Fragment {
                         }  catch (JSONException ex){}
                         VRecyclerView.setHasFixedSize(true);
                         RecycleAdapter adapter = new RecycleAdapter(dataList);
-                        //RecycleAdapter adapter = new RecycleAdapter(dataList);
                         VRecyclerView.setAdapter(adapter);
                         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                         VRecyclerView.setLayoutManager(llm);

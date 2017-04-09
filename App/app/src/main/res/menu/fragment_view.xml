@@ -14,6 +14,11 @@
     <item
         android:id="@+id/short_distance"
         android:orderInCategory="100"
-        android:title="Dichtbij - Ver weg"
+        android:title="Afstand"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/refresh"
+        android:orderInCategory="100"
+        android:title="Herlaad"
+        app:showAsAction="always"/>
 </menu>

@@ -1,5 +1,8 @@
 package com.example.sander.app;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  * Created by Sander on 8-4-2017.
  */
@@ -34,8 +37,10 @@ public class Data {
     public String getCode(){
         return code;
     }
-    public Float getDistance(){
-        return distance;
+    public Double getDistance(){
+        return Math.ceil(distance);
     }
+
+
 }
 
