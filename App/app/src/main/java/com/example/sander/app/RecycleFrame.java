@@ -68,7 +68,7 @@ public class RecycleFrame extends Fragment {
         Integer id = item.getItemId();
         if(id == R.id.action_A_Z){
             //Sorts the garages from A to Z
-            Collections.sort(names);
+            Collections.sort(dataList);
             //Refreshes the fragment
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.detach(this).attach(this).commit();
@@ -94,6 +94,7 @@ public class RecycleFrame extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        gps = new GPSTracker(getActivity());
         setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recycle, container, false);
@@ -112,36 +113,33 @@ public class RecycleFrame extends Fragment {
                                 for (int i = 0; i < values.length(); i++) {
 
                                     JSONObject jsonObject = values.getJSONObject(i);
-                                    //dataList.add(new Data(jsonObject.getString("parkgarage_name"), jsonObject.getString("charging_capcatity"), jsonObject.getDouble("langitude"),
-                                            //jsonObject.getDouble("longitude"), jsonObject.getString("parkgarage_code"), distance.get(i)));
-                                    names.add(jsonObject.getString("parkgarage_name"));
-                                    cPoints.add(jsonObject.getString("charging_capacity"));
-                                    code.add(jsonObject.getString("parkgarage_code"));
-                                    latitude.add(jsonObject.getString("langitude"));
-                                    longitude.add(jsonObject.getString("longitude"));
+
+                                    //names.add(jsonObject.getString("parkgarage_name"));
+                                    //cPoints.add(jsonObject.getString("charging_capacity"));
+                                    //code.add(jsonObject.getString("parkgarage_code"));
+                                    //latitude.add(jsonObject.getString("langitude"));
+                                    //longitude.add(jsonObject.getString("longitude"));
+
+                                    //check if gps is on
+                                    if(!gps.canGetLocation()){
+                                        gps.showSettingsAlert();
+                                    }
+                                    Location myLocation = new Location("");
+                                    myLocation.setLatitude(gps.getLatitude());
+                                    myLocation.setLongitude(gps.getLongitude());
                                     dLatitude.add(jsonObject.getDouble("langitude"));
                                     dLongitude.add(jsonObject.getDouble("longitude"));
+                                    Location parkingGarage = new Location("");
+                                    parkingGarage.setLatitude(dLatitude.get(i));
+                                    parkingGarage.setLongitude(dLongitude.get(i));
+                                    distance.add(myLocation.distanceTo(parkingGarage)/1000);
+                                    dataList.add(new Data(jsonObject.getString("parkgarage_name"), jsonObject.getString("charging_capacity"), jsonObject.getDouble("langitude"),
+                                            jsonObject.getDouble("longitude"), jsonObject.getString("parkgarage_code"), distance.get(i)));
                                 }
                             }
                         }  catch (JSONException ex){}
-                        gps = new GPSTracker(getActivity());
-                        //check if gps is on
-                        if(!gps.canGetLocation()){
-                            gps.showSettingsAlert();
-                        }
-                        Location myLocation = new Location("");
-                        myLocation.setLatitude(gps.getLatitude());
-                        myLocation.setLongitude(gps.getLongitude());
-                        for(int z = 0; z < latitude.size(); z++){
-                            Location parkingGarage = new Location("");
-                            parkingGarage.setLatitude(dLatitude.get(z));
-                            parkingGarage.setLongitude(dLongitude.get(z));
-                            distance.add(myLocation.distanceTo(parkingGarage)/1000);
-                        }
-
-
                         VRecyclerView.setHasFixedSize(true);
-                        RecycleAdapter adapter = new RecycleAdapter(names, cPoints, code, latitude, longitude, distance);
+                        RecycleAdapter adapter = new RecycleAdapter(dataList);
                         //RecycleAdapter adapter = new RecycleAdapter(dataList);
                         VRecyclerView.setAdapter(adapter);
                         LinearLayoutManager llm = new LinearLayoutManager(getActivity());

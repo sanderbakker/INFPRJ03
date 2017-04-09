@@ -22,4 +22,20 @@ public class Data {
     public String getNames(){
         return names;
     }
+    public String getcPoints(){
+        return cPoints;
+    }
+    public Double getLatitude(){
+        return latitude;
+    }
+    public Double getLongitude(){
+        return longitude;
+    }
+    public String getCode(){
+        return code;
+    }
+    public Float getDistance(){
+        return distance;
+    }
 }
+

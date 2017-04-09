@@ -23,12 +23,8 @@ import java.util.ArrayList;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> {
 
-    ArrayList<String> ArrayNames;
-    ArrayList<String> ArrayCharging;
-    ArrayList<String> ArrayCode;
-    ArrayList<String> ArrayLatitude;
-    ArrayList<String> ArrayLongitude;
-    ArrayList<Float> ArrayDistance;
+
+    ArrayList<Data> ArrayData;
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public CardView mCardView;
         public TextView TextViewNames;
@@ -36,7 +32,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         public TextView TextViewCode;
         public TextView TextViewLatitude;
         public TextView TextViewDistance;
-        public ImageView mImageView;
         public MyViewHolder(View v){
             super(v);
             mCardView = (CardView) v.findViewById(R.id.card_view);
@@ -48,14 +43,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         }
 
     }
-    public RecycleAdapter(ArrayList<String> names,
-                          ArrayList<String> cPoints, ArrayList<String> code, ArrayList<String> latitude, ArrayList<String> longitude, ArrayList<Float> distance){
-        ArrayNames = names;
-        ArrayCharging= cPoints;
-        ArrayCode = code;
-        ArrayLatitude = latitude;
-        ArrayLongitude = longitude;
-        ArrayDistance = distance;
+    public RecycleAdapter(ArrayList<Data> data){
+        ArrayData = data;
     }
     @Override
     public RecycleAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -65,13 +54,14 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     }
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position){
-        holder.TextViewNames.setText("Naam: " + ArrayNames.get(position));
-        holder.TextViewCharging.setText("Oplaadpunten: " + ArrayCharging.get(position));
-        holder.TextViewCode.setText("Code: " + ArrayCode.get(position));
-        holder.TextViewLatitude.setText("Positie: (" + ArrayLatitude.get(position) + ", " + ArrayLongitude.get(position)+ ")");
-        holder.TextViewDistance.setText(String.valueOf(ArrayDistance.get(position)));
+        holder.TextViewNames.setText("Naam: " + String.valueOf(ArrayData.get(position).getNames()));
+        holder.TextViewCharging.setText("Oplaadpunten: " + String.valueOf(ArrayData.get(position).getcPoints()));
+        holder.TextViewCode.setText("Code: " + String.valueOf(ArrayData.get(position).getCode()));
+        holder.TextViewLatitude.setText("Positie: (" + String.valueOf(ArrayData.get(position).getLatitude()) + ", " + String.valueOf(ArrayData.get(position).getLongitude())+ ")");
+        holder.TextViewDistance.setText(String.valueOf(ArrayData.get(position).getDistance()));
+
         //holder.mImageView.setImageResource(R.drawable.ic_local_parking_black_24dp);
     }
     @Override
-    public int getItemCount() { return ArrayNames.size(); }
+    public int getItemCount() { return ArrayData.size(); }
 }
