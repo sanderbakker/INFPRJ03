@@ -13,12 +13,12 @@
         <item
             android:id="@+id/nav_view"
             android:icon="@drawable/ic_near_me_black_24dp"
-            android:title="View"
+            android:title="Locaties"
         />
         <item
             android:id="@+id/nav_graph"
             android:icon="@drawable/ic_show_chart_black_24dp"
-            android:title="Graph"
+            android:title="Grafieken"
             />
     </group>
 

@@ -14,6 +14,7 @@ public class Data {
     public Double longitude;
     public String code;
     public Float distance;
+    public int scale = 1;
     public Data(String n, String cP, Double lat, Double lon, String c, Float dis ){
         names = n;
         cPoints = cP;
@@ -38,7 +39,7 @@ public class Data {
         return code;
     }
     public Double getDistance(){
-        return Math.ceil(distance);
+        return Math.round(distance * Math.pow(10, scale)) / Math.pow(10, scale);
     }
 
 

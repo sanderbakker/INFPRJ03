@@ -66,11 +66,11 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         holder.TextViewCode.setText("Code: " + String.valueOf(ArrayData.get(position).getCode()));
         holder.TextViewLatitude.setText("Positie: (" + String.valueOf(ArrayData.get(position).getLatitude()) + ", " + String.valueOf(ArrayData.get(position).getLongitude())+ ")");
         if(gps.canGetLocation()) {
-            holder.TextViewDistance.setText(String.valueOf(ArrayData.get(position).getDistance()) + " km");
+            holder.TextViewDistance.setText("Afstand tot: " + String.valueOf(ArrayData.get(position).getDistance()) + " km");
 
         }
         else{
-            holder.TextViewDistance.setText("Niet beschikbaar");
+            holder.TextViewDistance.setText("Afstand tot: Niet beschikbaar");
             if (count_gps == 0) {
                 gps.showSettingsAlert();
                 count_gps += 1;
