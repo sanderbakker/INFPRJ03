@@ -1,6 +1,7 @@
 package com.example.sander.app;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
@@ -12,22 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by Sander on 6-4-2017.
  */
 
-public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> {
+public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> implements View.OnClickListener{
 
 
     ArrayList<Data> ArrayData;
     GPSTracker gps;
     Integer count_gps = 0;
+    @Override
+    public void onClick(View v) {
+
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public CardView mCardView;
         public TextView TextViewNames;
@@ -55,6 +57,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     @Override
     public RecycleAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_card_view, parent, false);
+        v.setOnClickListener(this);
+
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }

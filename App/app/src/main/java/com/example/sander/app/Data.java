@@ -14,7 +14,7 @@ public class Data {
     public Double longitude;
     public String code;
     public Float distance;
-    public int scale = 1;
+    public int scale = 2;
     public Data(String n, String cP, Double lat, Double lon, String c, Float dis ){
         names = n;
         cPoints = cP;
