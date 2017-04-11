@@ -155,7 +155,7 @@ public class RecycleFrame extends Fragment {
                                     distance.add(myLocation.distanceTo(parkingGarage)/1000);
                                     //creates custom object with all required data
                                     dataList.add(new Data(jsonObject.getString("parkgarage_name"), jsonObject.getString("charging_capacity"), jsonObject.getDouble("langitude"),
-                                            jsonObject.getDouble("longitude"), jsonObject.getString("parkgarage_code"), distance.get(i)));
+                                            jsonObject.getDouble("longitude"), jsonObject.getString("parkgarage_code"), distance.get(i), jsonObject.getInt("car_capacity")));
                                 }
                             }
                         }  catch (JSONException ex){}

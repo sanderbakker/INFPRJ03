@@ -67,8 +67,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
         holder.TextViewNames.setText("Naam: " + String.valueOf(ArrayData.get(position).getNames()));
         holder.TextViewCharging.setText("Oplaadpunten: " + String.valueOf(ArrayData.get(position).getcPoints()));
-        holder.TextViewCode.setText("Code: " + String.valueOf(ArrayData.get(position).getCode()));
-        holder.TextViewLatitude.setText("Positie: (" + String.valueOf(ArrayData.get(position).getLatitude()) + ", " + String.valueOf(ArrayData.get(position).getLongitude())+ ")");
+        //holder.TextViewCode.setText("Code: " + String.valueOf(ArrayData.get(position).getCode()));
+        //holder.TextViewLatitude.setText("Positie: (" + String.valueOf(ArrayData.get(position).getLatitude()) + ", " + String.valueOf(ArrayData.get(position).getLongitude())+ ")");
+        holder.TextViewCode.setText("Aantal plaatsen: " + String.valueOf(ArrayData.get(position).getSpots()));
         if(gps.canGetLocation()) {
             holder.TextViewDistance.setText("Afstand tot: " + String.valueOf(ArrayData.get(position).getDistance()) + " km");
 
