@@ -81,7 +81,7 @@ public class GraphFrame extends Fragment {
                         //shows points at datapoints
                         series.setDrawDataPoints(true);
                         //size of the points
-                        series.setDataPointsRadius(15.0f);
+                        series.setDataPointsRadius(10.0f);
                         graph.addSeries(series);
 
 

@@ -66,6 +66,7 @@ public class RecycleFrame extends Fragment {
         super.onCreateOptionsMenu(menu,inflater);
     }
     public void refreshFragment(){
+        dataList.clear();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.detach(this).attach(this).commit();
     }
@@ -121,7 +122,6 @@ public class RecycleFrame extends Fragment {
             return true;
         }
         else if(id == R.id.refresh){
-            dataList.clear();
             refreshFragment();
         }
         return super.onOptionsItemSelected(item);
