@@ -70,13 +70,18 @@ public class GraphFrame extends Fragment {
                                 //new DataPoint(12, 0)
                         });
                         graph.setTitle("Wijk " + hoodSelector);
-                        //series.setSpacing(50);
-                        //series.setDataWidth(0.5);
                         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
 
-                        // set manual Y bounds
+                        // set manual x bounds
                         staticLabelsFormatter.setHorizontalLabels(new String[] {"2006", "2007","2008","2009","2011"});
+                        //creates custom x-axis
                         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+                        //set nice background color :)
+                        series.setDrawBackground(true);
+                        //shows points at datapoints
+                        series.setDrawDataPoints(true);
+                        //size of the points
+                        series.setDataPointsRadius(15.0f);
                         graph.addSeries(series);
 
 
