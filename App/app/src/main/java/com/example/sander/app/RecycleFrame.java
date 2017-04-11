@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.R.attr.delay;
 
@@ -107,8 +108,20 @@ public class RecycleFrame extends Fragment {
             refreshFragment();
             return true;
         }
-
+        else if(id == R.id.places){
+            //Sorts the garages from Z to A
+            Collections.sort(dataList, new Comparator<Data>() {
+                @Override
+                public int compare(Data place1, Data place2) {
+                    return place2.getSpots().compareTo(place1.getSpots());
+                }
+            });
+            //Refreshes the fragment
+            refreshFragment();
+            return true;
+        }
         else if(id == R.id.refresh){
+            dataList.clear();
             refreshFragment();
         }
         return super.onOptionsItemSelected(item);

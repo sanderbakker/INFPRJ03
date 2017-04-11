@@ -117,6 +117,7 @@ public class GPSTracker extends Service implements LocationListener {
         return null;
     }
 
+    //gets latitude
     public double getLatitude(){
         if(location != null){
             latitude = location.getLatitude();
@@ -126,9 +127,7 @@ public class GPSTracker extends Service implements LocationListener {
         return latitude;
     }
 
-    /**
-     * Function to get longitude
-     * */
+    //gets long
     public double getLongitude(){
         if(location != null){
             longitude = location.getLongitude();
@@ -139,21 +138,15 @@ public class GPSTracker extends Service implements LocationListener {
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
-
-    /**
-     * Function to show settings alert dialog
-     * */
+//show alert when GPS not on
     public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         // Setting Dialog Title
-        alertDialog.setTitle("GPS");
+        alertDialog.setTitle("Geen GPS beschikbaar");
 
         // Setting Dialog Message
         alertDialog.setMessage("GPS staat niet aan, wilt u deze aan zetten?");
-
-        // Setting Icon to Dialog
-        //alertDialog.setIcon(R.drawable.delete);
 
         // On pressing Settings button
         alertDialog.setPositiveButton("Instellingen", new DialogInterface.OnClickListener() {

@@ -121,6 +121,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
         googleMap.getUiSettings().setCompassEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
+
     }
 
     @Override

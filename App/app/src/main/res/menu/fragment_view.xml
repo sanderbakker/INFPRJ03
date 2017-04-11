@@ -24,6 +24,12 @@
         app:showAsAction="always"
         />
     <item
+        android:id="@+id/places"
+        android:orderInCategory="100"
+        android:title="Plekken"
+        app:showAsAction="never"
+        />
+    <item
         android:id="@+id/refresh"
         android:title="Herlaad"
         android:icon="@drawable/ic_refresh_black_24dp"
