@@ -40,6 +40,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,6 +50,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
     ArrayList<String> list = new ArrayList<>();
     ArrayList<Double> latitude = new ArrayList<>();
     ArrayList<Double> longitude = new ArrayList<>();
+
     public GoogleMaps(){
 
     }
@@ -80,7 +83,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
     public void onMapReady(final GoogleMap googleMap) {
 
         RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url= "http://test.dontstealmywag.ga/api/parkgarage.php";
+        String url= "http://test.dontstealmywag.ga/api/parkgarage_all.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -88,12 +91,13 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
                         // Do something with the response
                         try{
                             JSONObject o = new JSONObject(response);
-                            JSONArray values=o.getJSONArray("parkgarage");
+                            JSONArray values=o.getJSONArray("");
                             for ( int i=0; i< values.length(); i++) {
                                 JSONObject jsonObject = values.getJSONObject(i);
                                 list.add(jsonObject.getString("parkgarage_name"));
                                 longitude.add(jsonObject.getDouble("langitude"));
                                 latitude.add(jsonObject.getDouble("longitude"));
+
                             }
                         }  catch (JSONException ex){}
                         for(Integer i = 0; i < list.size(); i++){
@@ -116,6 +120,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
         googleMap.setMyLocationEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+
 
     }
 
