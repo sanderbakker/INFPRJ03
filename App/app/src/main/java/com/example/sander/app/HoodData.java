@@ -8,10 +8,12 @@ public class HoodData {
     public Double percentage;
     public Integer hood;
     public Integer year;
-    public HoodData(Double p, Integer h, Integer y){
+    public String hood_name;
+    public HoodData(Double p, Integer h, Integer y, String hN){
         percentage = p;
         hood = h;
         year = y;
+        hood_name = hN;
     }
     public Double getPercentage(){
         return percentage;
@@ -21,5 +23,9 @@ public class HoodData {
     }
     public Integer getYear(){
         return year;
+    }
+
+    public String getHood_name() {
+        return hood_name;
     }
 }

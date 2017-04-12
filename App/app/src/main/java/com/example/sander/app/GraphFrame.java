@@ -80,7 +80,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
     }
     public void getDataFromApi(final GraphView graph){
         RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url= "http://test.dontstealmywag.ga/api/damage_or_theft_car.php?hood_id=" + hoodSelector;
+        String url= "http://test.dontstealmywag.ga/api/damage_or_theft_car_wijk.php?hood_id=" + hoodSelector;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -88,10 +88,10 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         // Do something with the response
                         try{
                             JSONObject o = new JSONObject(response);
-                            JSONArray values=o.getJSONArray("damage_or_theft_car");
+                            JSONArray values=o.getJSONArray("");
                             for (int i = 0; i < values.length(); i++) {
                                 JSONObject jsonObject = values.getJSONObject(i);
-                                hoodDataList.add(new HoodData(jsonObject.getDouble("percentage"), jsonObject.getInt("hood_id"), jsonObject.getInt("year")));
+                                hoodDataList.add(new HoodData(jsonObject.getDouble("percentage"), jsonObject.getInt("hood_id"), jsonObject.getInt("year"), jsonObject.getString("hood_name")));
                             }
 
                         }  catch (JSONException ex){}
@@ -103,7 +103,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                                 new DataPoint(5, hoodDataList.get(4).getPercentage())
                                 //new DataPoint(12, 0)
                         });
-                        graph.setTitle("Wijk " + hoodSelector);
+                        graph.setTitle("Wijk " + hoodSelector + " - " + hoodDataList.get(0).getHood_name());
                         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
 
                         // set manual x bounds
