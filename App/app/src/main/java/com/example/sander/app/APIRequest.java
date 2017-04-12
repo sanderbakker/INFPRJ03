@@ -38,7 +38,8 @@ import java.util.ArrayList;
 
 public class APIRequest {
     Context mContext;
-    ArrayList<String> testList = new ArrayList<>();
+    ArrayList<String> hoodList = new ArrayList<>();
+    RequestQueue rq;
     public APIRequest (Context context){
         mContext = context;
     }
@@ -55,9 +56,9 @@ public class APIRequest {
                             JSONArray values=o.getJSONArray("");
                             for (int i = 0; i < values.length(); i++) {
                                 JSONObject jsonObject = values.getJSONObject(i);
-                                if(!testList.contains(jsonObject.getString("hood_name"))){
-                                    testList.add(jsonObject.getString("hood_name"));
-                            }
+                                //if(!hoodList.contains(jsonObject.getString("hood_name"))){
+                                    hoodList.add(jsonObject.getString("hood_name"));
+                            //}
                             }
 
                         }  catch (JSONException ex){}
@@ -75,7 +76,7 @@ public class APIRequest {
 
         rq.add(stringRequest);
     }
-    public ArrayList<String> getTestList(){
-        return testList;
+    public ArrayList<String> getHoodList(){
+        return hoodList;
     }
 }
