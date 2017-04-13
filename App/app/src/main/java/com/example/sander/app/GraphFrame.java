@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -349,6 +350,10 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                                 Toast.makeText(getActivity(), "Punt "+ dataPoint, Toast.LENGTH_SHORT).show();
                             }
                         });
+                        series.setTitle("%");
+                        series.setAnimated(true);
+                        graph.getLegendRenderer().setVisible(true);
+                        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
                         graph.addSeries(series);
 
 
