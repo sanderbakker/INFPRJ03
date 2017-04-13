@@ -25,7 +25,10 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -315,6 +318,8 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                             }
 
                         }  catch (JSONException ex){}
+                        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+
                         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                                 new DataPoint(1, hoodDataList.get(0).getPercentage()),
                                 new DataPoint(2, hoodDataList.get(1).getPercentage()),
@@ -323,19 +328,25 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                                 new DataPoint(5, hoodDataList.get(4).getPercentage())
                                 //new DataPoint(12, 0)
                         });
-                        graph.setTitle("Wijk " + hoodSelector + " - " + hoodDataList.get(0).getHood_name());
-                        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
 
                         // set manual x bounds
                         staticLabelsFormatter.setHorizontalLabels(new String[] {"2006", "2007","2008","2009","2011"});
                         //creates custom x-axis
                         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+                        graph.setTitle("Wijk " + hoodSelector + " - " + hoodDataList.get(0).getHood_name());
+
                         //set nice background color :)
                         series.setDrawBackground(true);
                         //shows points at datapoints
                         series.setDrawDataPoints(true);
                         //size of the points
                         series.setDataPointsRadius(10.0f);
+                        series.setOnDataPointTapListener(new OnDataPointTapListener() {
+                            @Override
+                            public void onTap(Series series, DataPointInterface dataPoint) {
+                                Toast.makeText(getActivity(), "Punt "+ dataPoint, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         graph.addSeries(series);
 
 
