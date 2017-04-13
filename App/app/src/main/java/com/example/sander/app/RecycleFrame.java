@@ -45,10 +45,12 @@ import static android.R.attr.delay;
 
 public class RecycleFrame extends Fragment {
     GPSTracker gps;
+
     ArrayList<Double> dLatitude = new ArrayList<>();
     ArrayList<Double> dLongitude = new ArrayList<>();
     ArrayList<Float> distance = new ArrayList<>();
     ArrayList<Data> dataList = new ArrayList<>();
+    RecycleAdapter adapter = new RecycleAdapter(dataList);
     Timer timer;
     public RecycleFrame() {
         // Required empty public constructor
@@ -84,7 +86,7 @@ public class RecycleFrame extends Fragment {
                 }
             });
             //Refreshes the fragment
-            refreshFragment();
+            adapter.notifyDataSetChanged();
             return true;
         }
         else if(id == R.id.action_Z_A){
@@ -96,7 +98,7 @@ public class RecycleFrame extends Fragment {
                 }
             });
             //Refreshes the fragment
-            refreshFragment();
+            adapter.notifyDataSetChanged();
             return true;
         }
         else if (id == R.id.short_distance){
@@ -106,7 +108,7 @@ public class RecycleFrame extends Fragment {
                     return distance1.getDistance().compareTo(distance2.getDistance());
                 }
             });
-            refreshFragment();
+            adapter.notifyDataSetChanged();
             return true;
         }
         else if(id == R.id.places){
@@ -118,7 +120,7 @@ public class RecycleFrame extends Fragment {
                 }
             });
             //Refreshes the fragment
-            refreshFragment();
+            adapter.notifyDataSetChanged();
             return true;
         }
         else if(id == R.id.refresh){
@@ -173,10 +175,11 @@ public class RecycleFrame extends Fragment {
                             }
                         }  catch (JSONException ex){}
                         VRecyclerView.setHasFixedSize(true);
-                        RecycleAdapter adapter = new RecycleAdapter(dataList);
+
                         VRecyclerView.setAdapter(adapter);
                         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                         VRecyclerView.setLayoutManager(llm);
+                        adapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener() {

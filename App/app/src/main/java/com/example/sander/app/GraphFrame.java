@@ -46,6 +46,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
     Integer hoodSelector = 27;
     ArrayList<HoodData> hoodDataList = new ArrayList<>();
     ArrayList<String> hoodList = new ArrayList<>();
+
     Context mContext;
 
     @Override
@@ -301,6 +302,8 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
         hoodSelector = hood;
     }
 
+
+
     public void getDataFromApi(final GraphView graph) {
         RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url= "http://test.dontstealmywag.ga/api/damage_or_theft_car_wijk.php?hood_id=" + hoodSelector;
@@ -334,7 +337,6 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         //creates custom x-axis
                         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
                         graph.setTitle("Wijk " + hoodSelector + " - " + hoodDataList.get(0).getHood_name());
-
                         //set nice background color :)
                         series.setDrawBackground(true);
                         //shows points at datapoints
