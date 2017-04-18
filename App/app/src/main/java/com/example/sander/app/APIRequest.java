@@ -62,7 +62,7 @@ public class APIRequest {
                             }
 
                         }  catch (JSONException ex){}
-                                //new DataPoint(12, 0)
+
 
                     }
                 },
