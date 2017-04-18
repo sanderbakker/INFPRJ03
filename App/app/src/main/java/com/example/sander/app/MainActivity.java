@@ -116,6 +116,9 @@ public class MainActivity extends AppCompatActivity
         else if(id == R.id.nav_graph){
             FragmentManager.beginTransaction().replace(R.id.content_frame, new GraphFrame()).commit();
         }
+        else if(id == R.id.nav_list){
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new ListFrame()).commit();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

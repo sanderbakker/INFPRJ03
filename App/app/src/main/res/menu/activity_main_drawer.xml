@@ -20,6 +20,9 @@
             android:icon="@drawable/ic_show_chart_black_24dp"
             android:title="Grafieken"
             />
+        <item android:id="@+id/nav_list"
+            android:title="Cijfers"
+            android:icon="@drawable/ic_location_city_black_24dp"/>
     </group>
 
 </menu>
