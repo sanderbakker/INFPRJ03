@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -113,6 +114,13 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                                 new DataPoint(5, hoodDataList.get(4).getPercentage())
                                 //new DataPoint(12, 0)
                         });
+                        LineGraphSeries<DataPoint> average = new LineGraphSeries<>(new DataPoint[]{
+                                new DataPoint(1, 16.3),
+                                new DataPoint(2, 16.4),
+                                new DataPoint(3, 17.5),
+                                new DataPoint(4, 17.9),
+                                new DataPoint(5, 16.8)
+                        });
 
                         // set manual x bounds
                         staticLabelsFormatter.setHorizontalLabels(new String[] {"2006", "2007","2008","2009","2011"});
@@ -123,6 +131,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         series.setDrawBackground(true);
                         //shows points at datapoints
                         series.setDrawDataPoints(true);
+                        average.setDrawDataPoints(true);
                         //size of the points
                         series.setDataPointsRadius(10.0f);
                         series.setOnDataPointTapListener(new OnDataPointTapListener() {
@@ -133,6 +142,11 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         });
                         series.setTitle("%");
                         series.setAnimated(true);
+                        average.setAnimated(true);
+                        average.setColor(Color.argb(255, 0, 51, 153));
+                        average.setThickness(5);
+                        series.setColor(Color.argb(255, 102, 204, 255));
+                        graph.addSeries(average);
                         graph.getLegendRenderer().setVisible(true);
                         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
                         graph.addSeries(series);

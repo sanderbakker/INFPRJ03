@@ -11,25 +11,43 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/number_good"
-        android:layout_marginLeft="250dp"
-        android:textColor="#009A31"
+        android:id="@+id/rating45"
+        android:layout_marginLeft="265dp"
+        android:textColor="#8aff77"
         android:layout_centerVertical="true"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/number_average"
-        android:layout_marginLeft="250dp"
+        android:id="@+id/rating34"
+        android:layout_marginLeft="265dp"
         android:layout_centerVertical="true"
-        android:textColor="#FFD900"
+        android:textColor="#d1ff77"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/number_view"
-        android:layout_marginLeft="250dp"
-        android:textColor="#D5331E"
+        android:id="@+id/rating23"
+        android:layout_marginLeft="265dp"
+        android:textColor="#ffed77"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rating12"
+        android:layout_marginLeft="265dp"
+        android:textColor="#ffc777"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rating01"
+        android:layout_marginLeft="265dp"
+        android:textColor="#ff7777"
         android:gravity="center"
         android:layout_centerVertical="true"
         />
