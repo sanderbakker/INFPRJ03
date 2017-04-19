@@ -45,7 +45,7 @@ import android.widget.Toast;
  */
 
 public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedListener {
-    Integer hoodSelector = 27;
+    Integer hoodSelector = 26;
     ArrayList<HoodData> hoodDataList = new ArrayList<>();
     ArrayList<String> hoodList = new ArrayList<>();
     ArrayList<HoodData> completeHoodList = new ArrayList<>();
@@ -55,7 +55,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
         // Showing selected spinner item
         for(int i = 1; i < hoodList.size(); i++) {
             if (item.equals(hoodList.get(i))) {
-                setHoodId(i + 27);
+                setHoodId(i + 26);
                 refreshFragment();
             }
 
@@ -234,7 +234,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         }  catch (JSONException ex){}
                         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
 
-                        if(hoodSelector != 27) {
+                        if(hoodSelector != 26) {
 
                             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
                                     new DataPoint(1, (100 - ((100 / (calculateMax(2006) + (calculateAvg(2006) / 2)) * hoodDataList.get(0).getPercentage()))) / 20),

@@ -38,7 +38,7 @@ import java.util.ArrayList;
  */
 
 public class GraphFrameV2 extends Fragment implements AdapterView.OnItemSelectedListener {
-    Integer hoodSelector = 27;
+    Integer hoodSelector = 26;
     ArrayList<HoodData> hoodDataList = new ArrayList<>();
     ArrayList<String> hoodList = new ArrayList<>();
     ArrayList<HoodData> completeHoodList = new ArrayList<>();
@@ -49,7 +49,7 @@ public class GraphFrameV2 extends Fragment implements AdapterView.OnItemSelected
         // Showing selected spinner item
         for(int i = 1; i < hoodList.size(); i++) {
             if (item.equals(hoodList.get(i))) {
-                setHoodId(i + 27);
+                setHoodId(i + 26);
                 refreshFragment();
             }
 
