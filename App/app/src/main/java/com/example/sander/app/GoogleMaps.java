@@ -47,6 +47,7 @@ import java.util.Locale;
 
 
 public class GoogleMaps extends Fragment implements OnMapReadyCallback {
+    // creates arrays
     ArrayList<String> list = new ArrayList<>();
     ArrayList<Double> latitude = new ArrayList<>();
     ArrayList<Double> longitude = new ArrayList<>();
@@ -64,7 +65,7 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //creates MapView
         MapView mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
 
@@ -112,11 +113,15 @@ public class GoogleMaps extends Fragment implements OnMapReadyCallback {
                     }
                 });
         rq.add(stringRequest);
+        //new marker point
         LatLng marker = new LatLng(51.9244201, 4.4777325);
+        //moves camera to the center of Rotterdam
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 12));
+        // checks for premissions
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+        //shows location, compass
         googleMap.setMyLocationEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);

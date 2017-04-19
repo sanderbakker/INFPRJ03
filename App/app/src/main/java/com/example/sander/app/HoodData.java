@@ -2,6 +2,7 @@ package com.example.sander.app;
 
 /**
  * Created by Sander on 11-4-2017.
+ * Creates custom ArrayList for the GraphView
  */
 
 public class HoodData {
