@@ -112,8 +112,9 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                                 new DataPoint(3, hoodDataList.get(2).getPercentage()),
                                 new DataPoint(4, hoodDataList.get(3).getPercentage()),
                                 new DataPoint(5, hoodDataList.get(4).getPercentage())
-                                //new DataPoint(12, 0)
+
                         });
+
                         LineGraphSeries<DataPoint> average = new LineGraphSeries<>(new DataPoint[]{
                                 new DataPoint(1, 16.3),
                                 new DataPoint(2, 16.4),
@@ -144,7 +145,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         series.setAnimated(true);
                         average.setAnimated(true);
                         average.setColor(Color.argb(255, 0, 51, 153));
-                        average.setThickness(5);
+                        average.setThickness(7);
                         series.setColor(Color.argb(255, 102, 204, 255));
                         graph.addSeries(average);
                         graph.getLegendRenderer().setVisible(true);
