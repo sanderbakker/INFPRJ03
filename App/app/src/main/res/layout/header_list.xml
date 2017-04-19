@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:gravity="center"
-        android:text="Veiligheidscijfer per wijk"
+        android:text="Gemiddeld veiligheidscijfer per wijk"
         android:background="#0099cc" />
 
 </LinearLayout>
