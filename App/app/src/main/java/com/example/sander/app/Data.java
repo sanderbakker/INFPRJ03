@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 /**
  * Created by Sander on 8-4-2017.
+ * Custom ArrayList, for managing all the data from the API
  */
 
 public class Data {

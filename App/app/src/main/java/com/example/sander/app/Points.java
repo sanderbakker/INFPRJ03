@@ -2,6 +2,7 @@ package com.example.sander.app;
 
 /**
  * Created by Sander on 15-4-2017.
+ * Custom ArrayList for handling the ratings of a hood
  */
 
 public class Points {

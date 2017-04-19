@@ -23,10 +23,12 @@ public class ListAdapter extends ArrayAdapter<Points> {
     private Context context;
     private boolean useList = true;
     public ListAdapter(Context context, ArrayList items){
+        //sets layout of the list
         super(context, android.R.layout.simple_list_item_1, items);
         this.context = context;
     }
     public class ViewHolder{
+        //creates holder
         TextView titleText;
         TextView numberTextGood;
         TextView numberTextAverage;
@@ -36,6 +38,7 @@ public class ListAdapter extends ArrayAdapter<Points> {
         ViewHolder holder = null;
         Points item = (Points)getItem(position);
         View viewToUse = null;
+        //binds all the holders
         LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             if(useList){

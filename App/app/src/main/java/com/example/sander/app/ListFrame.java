@@ -45,12 +45,14 @@ public class ListFrame extends Fragment {
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //creates menu
         inflater.inflate(R.menu.fragment_list, menu);
         super.onCreateOptionsMenu(menu,inflater);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Integer id = item.getItemId();
+        //sorting for inside the menu
         if (id == R.id.action_A_Z) {
             //Sorts the garages from A to Z
 
@@ -95,7 +97,9 @@ public class ListFrame extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_list,
                 container, false);
+        //shows custom menu
         setHasOptionsMenu(true);
+        //API request
         RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url= "http://test.dontstealmywag.ga/api/hood_points.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -115,7 +119,7 @@ public class ListFrame extends Fragment {
                                 }
                             }
                         }  catch (JSONException ex){}
-
+                        //creates a listview
                         ListView listView = (ListView) view.findViewById(R.id.list);
                         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.header_list, listView,
                                 false);

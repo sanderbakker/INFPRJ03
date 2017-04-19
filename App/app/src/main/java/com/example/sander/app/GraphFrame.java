@@ -47,9 +47,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
     Integer hoodSelector = 27;
     ArrayList<HoodData> hoodDataList = new ArrayList<>();
     ArrayList<String> hoodList = new ArrayList<>();
-
-    Context mContext;
-
+    
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
@@ -68,6 +66,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
 
     }
     public void refreshFragment(){
+        //refreshes the Fragment
         hoodDataList.clear();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.detach(this).attach(this).commit();
@@ -77,7 +76,6 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
         final View view = inflater.inflate(R.layout.fragment_graph,
                 container, false);
         //API Request for all the hoods
-
         getDataFromApi((GraphView) view.findViewById(R.id.graph));
         getDataForSpinner((Spinner) view.findViewById(R.id.spinner));
         return view;

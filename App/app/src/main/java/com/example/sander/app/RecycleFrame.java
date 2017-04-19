@@ -70,6 +70,8 @@ public class RecycleFrame extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_view, menu);
         MenuItem item = menu.findItem(R.id.search);
+
+        // creates searchView
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 
         searchView.setQueryHint("Zoeken");
