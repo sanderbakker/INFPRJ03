@@ -47,7 +47,6 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
     Integer hoodSelector = 27;
     ArrayList<HoodData> hoodDataList = new ArrayList<>();
     ArrayList<String> hoodList = new ArrayList<>();
-    
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();

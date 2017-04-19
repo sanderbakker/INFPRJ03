@@ -15,6 +15,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -22,17 +24,15 @@ import java.util.Locale;
  * Created by Sander on 6-4-2017.
  */
 
-public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> implements View.OnClickListener, Filterable{
+public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHolder> implements Filterable{
 
 
     ArrayList<Data> ArrayData;
     ArrayList<Data> FilteredData;
     GPSTracker gps;
     Integer count_gps = 0;
-    @Override
-    public void onClick(View v) {
 
-    }
+
     public Filter getFilter() {
         //creates a new filter
         return new Filter() {
@@ -69,7 +69,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // creates holders
         public CardView mCardView;
         public TextView TextViewNames;
@@ -77,10 +77,12 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         public TextView TextViewCode;
         public TextView TextViewLatitude;
         public TextView TextViewDistance;
+
         public MyViewHolder(View v){
 
             super(v);
             Context context = v.getContext();
+            v.setOnClickListener(this);
             gps = new GPSTracker(context);
             //binds all the view to an item in xml
             mCardView = (CardView) v.findViewById(R.id.card_view);
@@ -89,7 +91,15 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
             TextViewCode = (TextView) v.findViewById(R.id.text_view_code);
             TextViewLatitude = (TextView) v.findViewById(R.id.text_view_latitude);
             TextViewDistance = (TextView) v.findViewById(R.id.text_view_distance);
+
         }
+        @Override
+        public void onClick(View v){
+            Integer item = getAdapterPosition();
+            Toast.makeText(v.getContext(), String.valueOf(item),
+                    Toast.LENGTH_LONG).show();
+        }
+
 
     }
     public RecycleAdapter(ArrayList<Data> data){
@@ -100,9 +110,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     public RecycleAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         //binds the view to a xml id
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_card_view, parent, false);
-        // for future clicking on the items
-        v.setOnClickListener(this);
-
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
