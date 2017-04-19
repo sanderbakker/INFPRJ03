@@ -171,7 +171,7 @@ public class RecycleFrame extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recycle, container, false);
         final RecyclerView VRecyclerView = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
         RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url= "http://test.dontstealmywag.ga/api/parkgarage_all.php";
+        String url= "http://dontstealmywag.ga/api/parkgarage_all.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -201,7 +201,8 @@ public class RecycleFrame extends Fragment {
                                     distance.add(myLocation.distanceTo(parkingGarage)/1000);
                                     //creates custom object with all required data
                                     dataList.add(new Data(jsonObject.getString("parkgarage_name"), jsonObject.getString("charging_capacity"), jsonObject.getDouble("langitude"),
-                                            jsonObject.getDouble("longitude"), jsonObject.getString("parkgarage_code"), distance.get(i), jsonObject.getInt("car_capacity")));
+                                            jsonObject.getDouble("longitude"), jsonObject.getString("parkgarage_code"), distance.get(i), jsonObject.getInt("car_capacity"),
+                                            jsonObject.getString("zipcode"), jsonObject.getString("street"), jsonObject.getString("street_number"), jsonObject.getString("city")));
                                 }
                             }
                         }  catch (JSONException ex){}

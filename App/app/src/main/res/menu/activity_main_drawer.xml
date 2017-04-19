@@ -5,24 +5,32 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
+            android:title="Home"
+            />
         <item
             android:id="@+id/nav_maps"
             android:icon="@drawable/ic_map_black_24dp"
-            android:title="Maps" />
+            android:title="Maps"
+            />
         <item
             android:id="@+id/nav_view"
             android:icon="@drawable/ic_near_me_black_24dp"
             android:title="Locaties"
-        />
+            />
         <item
             android:id="@+id/nav_graph"
             android:icon="@drawable/ic_show_chart_black_24dp"
-            android:title="Grafieken"
+            android:title="Grafieken diefstal auto's"
+            />
+        <item
+            android:id="@+id/nav_graphv2"
+            android:icon="@drawable/ic_show_chart_black_24dp"
+            android:title="Grafieken diefstal uit auto's"
             />
         <item android:id="@+id/nav_list"
             android:title="Cijfers"
-            android:icon="@drawable/ic_location_city_black_24dp"/>
+            android:icon="@drawable/ic_location_city_black_24dp"
+            />
     </group>
 
 </menu>

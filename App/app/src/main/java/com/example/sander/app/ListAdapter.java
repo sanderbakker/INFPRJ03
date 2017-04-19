@@ -30,9 +30,11 @@ public class ListAdapter extends ArrayAdapter<Points> {
     public class ViewHolder{
         //creates holder
         TextView titleText;
-        TextView numberTextGood;
-        TextView numberTextAverage;
-        TextView numberTextBad;
+        TextView numberText45;
+        TextView numberText34;
+        TextView numberText23;
+        TextView numberText12;
+        TextView numberText01;
     }
     public View getView(int position, View convertView, ViewGroup parent){
         ViewHolder holder = null;
@@ -46,9 +48,11 @@ public class ListAdapter extends ArrayAdapter<Points> {
             }
             holder = new ViewHolder();
             holder.titleText = (TextView)viewToUse.findViewById(R.id.hoods);
-            holder.numberTextGood = (TextView) viewToUse.findViewById(R.id.number_good);
-            holder.numberTextAverage = (TextView) viewToUse.findViewById(R.id.number_average);
-            holder.numberTextBad = (TextView) viewToUse.findViewById(R.id.number_view);
+            holder.numberText45 = (TextView) viewToUse.findViewById(R.id.rating45);
+            holder.numberText34 = (TextView) viewToUse.findViewById(R.id.rating34);
+            holder.numberText23 = (TextView) viewToUse.findViewById(R.id.rating23);
+            holder.numberText12 = (TextView) viewToUse.findViewById(R.id.rating12);
+            holder.numberText01 = (TextView) viewToUse.findViewById(R.id.rating01);
             viewToUse.setTag(holder);
         } else {
             viewToUse = convertView;
@@ -56,17 +60,23 @@ public class ListAdapter extends ArrayAdapter<Points> {
         }
         holder.titleText.setText(item.getHoodName() + " (Wijk " + item.getHoodId() + ")");
         // first clear all text-views
-        holder.numberTextGood.setText("");
-        holder.numberTextAverage.setText("");
-        holder.numberTextBad.setText("");
+        holder.numberText45.setText("");
+        holder.numberText34.setText("");
+        holder.numberText23.setText("");
+        holder.numberText12.setText("");
+        holder.numberText01.setText("");
 
         // now set the value in the proper one
         if(item.getPoints() >= 4.0){
-            holder.numberTextGood.setText(String.valueOf(item.getPoints()) + "/5.0");
-        } else if(item.getPoints() < 4.0 && item.getPoints() > 3.0){
-            holder.numberTextAverage.setText(String.valueOf(item.getPoints()) + "/5.0");
-        } else if(item.getPoints() < 3.0){
-            holder.numberTextBad.setText(String.valueOf(item.getPoints()) + "/5.0");
+            holder.numberText45.setText(String.valueOf(item.getPoints()) + "/5.0");
+        } else if(item.getPoints() < 4.0 && item.getPoints() >= 3.0){
+            holder.numberText34.setText(String.valueOf(item.getPoints()) + "/5.0");
+        } else if(item.getPoints() < 3.0 && item.getPoints() >= 2.0) {
+            holder.numberText23.setText(String.valueOf(item.getPoints()) + "/5.0");
+        } else if(item.getPoints() < 2.0 && item.getPoints() >= 1.0) {
+            holder.numberText12.setText(String.valueOf(item.getPoints()) + "/5.0");
+        } else if(item.getPoints() < 1.0 && item.getPoints() >= 0.0) {
+            holder.numberText01.setText(String.valueOf(item.getPoints()) + "/5.0");
         }
         return viewToUse;
     }

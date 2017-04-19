@@ -5,38 +5,59 @@
 
     <TextView
         android:id="@+id/name_info"
-        android:layout_width="match_parent"
-        android:layout_height="25dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="150dp"
+
+        android:layout_gravity="center"
+        />
 
     <TextView
         android:id="@+id/code_info"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+
         />
     <TextView
         android:id="@+id/spots_info"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+
         />
     <TextView
         android:id="@+id/distance_info"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
         />
     <TextView
         android:id="@+id/cPoints_info"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="25dp"
-        android:layout_marginTop="60dp"
+
         />
     <TextView
         android:id="@+id/location_info"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginTop="70dp"
+        android:layout_gravity="center"
+
+        />
+    <TextView
+        android:id="@+id/address_info"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+
+        />
+    <TextView
+        android:id="@+id/zipcode_info"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="25dp"
         />
 
 </LinearLayout>

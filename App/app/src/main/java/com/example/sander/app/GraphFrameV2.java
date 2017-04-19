@@ -1,20 +1,16 @@
 package com.example.sander.app;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,7 +21,6 @@ import com.android.volley.toolbox.Volley;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
-import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -37,14 +32,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import android.R.layout.*;
-import android.widget.Toast;
 
 /**
  * Created by Sander on 8-4-2017.
  */
 
-public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedListener {
+public class GraphFrameV2 extends Fragment implements AdapterView.OnItemSelectedListener {
     Integer hoodSelector = 27;
     ArrayList<HoodData> hoodDataList = new ArrayList<>();
     ArrayList<String> hoodList = new ArrayList<>();
@@ -89,7 +82,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
 
     public void getDataFromApi(final GraphView graph) {
         RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url= "http://test.dontstealmywag.ga/api/damage_or_theft_car_wijk.php?hood_id=" + hoodSelector;
+        String url= "http://test.dontstealmywag.ga/api/theft_outof_car_wijk.php?hood_id=" + hoodSelector;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -112,15 +105,15 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                                 new DataPoint(3, hoodDataList.get(2).getPercentage()),
                                 new DataPoint(4, hoodDataList.get(3).getPercentage()),
                                 new DataPoint(5, hoodDataList.get(4).getPercentage())
-
+                                //new DataPoint(12, 0)
                         });
-
                         LineGraphSeries<DataPoint> average = new LineGraphSeries<>(new DataPoint[]{
-                                new DataPoint(1, 16.3),
-                                new DataPoint(2, 16.4),
+                                new DataPoint(1, 18.5),
+                                new DataPoint(2, 16.5),
                                 new DataPoint(3, 17.5),
-                                new DataPoint(4, 17.9),
-                                new DataPoint(5, 16.8)
+                                new DataPoint(4, 18.0),
+                                new DataPoint(5, 14.0)
+                                //tijdelijke lijn nog aanpassen
                         });
 
                         // set manual x bounds
@@ -145,7 +138,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         series.setAnimated(true);
                         average.setAnimated(true);
                         average.setColor(Color.argb(255, 0, 51, 153));
-                        average.setThickness(7);
+                        average.setThickness(5);
                         series.setColor(Color.argb(255, 102, 204, 255));
                         graph.addSeries(average);
                         graph.getLegendRenderer().setVisible(true);
@@ -168,7 +161,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
     }
     public void getDataForSpinner(final Spinner spinner){
         RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url= "http://test.dontstealmywag.ga/api/damage_or_theft_car_wijk.php";
+        String url= "http://test.dontstealmywag.ga/api/theft_outof_car_wijk.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -193,7 +186,7 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         spinner.setPrompt("Title");
                         spinner.setAdapter(adapter);
 
-                        spinner.setOnItemSelectedListener(GraphFrame.this);
+                        spinner.setOnItemSelectedListener(GraphFrameV2.this);
 
 
                     }

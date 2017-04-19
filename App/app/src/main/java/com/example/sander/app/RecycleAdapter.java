@@ -109,6 +109,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
             arguments.putString("4", String.valueOf(ArrayData.get(item).getDistance()));
             arguments.putString("5", String.valueOf(ArrayData.get(item).getSpots()));
             arguments.putString("6", "(" + String.valueOf(ArrayData.get(item).getLatitude()) + " , " + String.valueOf(ArrayData.get(item).getLongitude()) + ")");
+            arguments.putString("7", "Straatnaam: "+ ArrayData.get(item).getStreet() +  ArrayData.get(item).getStreetNumber());
+            arguments.putString("8", "Postcode: " +ArrayData.get(item).getZipcode() + ", "  + ArrayData.get(item).getCity());
             parkInfoFrame.setArguments(arguments);
             //opens the new Fragment upon click
             activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, parkInfoFrame).addToBackStack(null).commit();

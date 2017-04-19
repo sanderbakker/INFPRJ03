@@ -116,6 +116,9 @@ public class MainActivity extends AppCompatActivity
         else if(id == R.id.nav_graph){
             FragmentManager.beginTransaction().replace(R.id.content_frame, new GraphFrame()).commit();
         }
+        else if(id == R.id.nav_graphv2){
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new GraphFrameV2()).commit();
+        }
         else if(id == R.id.nav_list){
             FragmentManager.beginTransaction().replace(R.id.content_frame, new ListFrame()).commit();
         }
