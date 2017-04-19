@@ -234,7 +234,6 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         }  catch (JSONException ex){}
                         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
 
-<<<<<<< HEAD
                         if(hoodSelector != 27) {
 
                             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
@@ -284,60 +283,6 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                             graph.addSeries(series);
 
                         }
-=======
-                        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                                new DataPoint(1, hoodDataList.get(0).getPercentage()),
-                                new DataPoint(2, hoodDataList.get(1).getPercentage()),
-                                new DataPoint(3, hoodDataList.get(2).getPercentage()),
-                                new DataPoint(4, hoodDataList.get(3).getPercentage()),
-                                new DataPoint(5, hoodDataList.get(4).getPercentage())
-
-                        });
-
-                        LineGraphSeries<DataPoint> average = new LineGraphSeries<>(new DataPoint[]{
-                                /*new DataPoint(1, 16.3),
-                                new DataPoint(2, 16.4),
-                                new DataPoint(3, 17.5),
-                                new DataPoint(4, 17.9),
-                                new DataPoint(5, 16.8) */
-                                new DataPoint(1, 3),
-                                new DataPoint(2, 3),
-                                new DataPoint(3, 3),
-                                new DataPoint(4, 3),
-                                new DataPoint(5, 3)
-                        });
-
-                        // set manual x bounds
-                        staticLabelsFormatter.setHorizontalLabels(new String[] {"2006", "2007","2008","2009","2011"});
-                        //creates custom x-axis
-                        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
-                        graph.setTitle("Wijk " + hoodSelector + " - " + hoodDataList.get(0).getHood_name());
-                        //set nice background color :)
-                        series.setDrawBackground(true);
-                        //shows points at datapoints
-                        series.setDrawDataPoints(true);
-                        average.setDrawDataPoints(true);
-                        //size of the points
-                        series.setDataPointsRadius(10.0f);
-                        series.setOnDataPointTapListener(new OnDataPointTapListener() {
-                            @Override
-                            public void onTap(Series series, DataPointInterface dataPoint) {
-                                Toast.makeText(getActivity(), "Punt "+ dataPoint, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        series.setTitle("%");
-                        series.setAnimated(true);
-                        average.setAnimated(true);
-                        average.setColor(Color.argb(255, 0, 51, 153));
-                        average.setThickness(7);
-                        series.setColor(Color.argb(255, 102, 204, 255));
-                        graph.addSeries(average);
-                        graph.getLegendRenderer().setVisible(true);
-                        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
-                        graph.addSeries(series);
-
-
->>>>>>> origin/master
 
                     }
                 },
