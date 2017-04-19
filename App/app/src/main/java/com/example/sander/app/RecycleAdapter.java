@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -96,8 +97,21 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         @Override
         public void onClick(View v){
             Integer item = getAdapterPosition();
-            Toast.makeText(v.getContext(), String.valueOf(item),
-                    Toast.LENGTH_LONG).show();
+            //gets activity
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            //creates new Fragment
+            ParkInfoFrame parkInfoFrame = new ParkInfoFrame();
+            Bundle arguments = new Bundle();
+
+            arguments.putString("1", ArrayData.get(item).getNames());
+            arguments.putString("2", ArrayData.get(item).getCode());
+            arguments.putString("3", ArrayData.get(item).getcPoints());
+            arguments.putString("4", String.valueOf(ArrayData.get(item).getDistance()));
+            arguments.putString("5", String.valueOf(ArrayData.get(item).getSpots()));
+            arguments.putString("6", "(" + String.valueOf(ArrayData.get(item).getLatitude()) + " , " + String.valueOf(ArrayData.get(item).getLongitude()) + ")");
+            parkInfoFrame.setArguments(arguments);
+            //opens the new Fragment upon click
+            activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, parkInfoFrame).addToBackStack(null).commit();
         }
 
 

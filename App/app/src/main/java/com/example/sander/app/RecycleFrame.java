@@ -50,6 +50,7 @@ import static android.R.attr.delay;
 public class RecycleFrame extends Fragment {
     GPSTracker gps;
     Context mContext;
+
     ArrayList<Double> dLatitude = new ArrayList<>();
     ArrayList<Double> dLongitude = new ArrayList<>();
     ArrayList<Float> distance = new ArrayList<>();
