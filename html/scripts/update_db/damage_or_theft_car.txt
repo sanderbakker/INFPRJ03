@@ -59,7 +59,7 @@
 ;;Oosterflank;13,9;15,6;12,9;20,4;13
 ;;Zevenkamp;16,2;20,9;19,4;15,4;16,1
 ;;Nesselande;4;5,3;4,2;9,3;7,4
-;;Rozenburg;11,9;10,1
+;;Rozenburg;11,9;10,1;9,5;15,2;13,2;
 ;;Stadsdriehoek/C.S. Kwartier;23,4;23,9;20,6;19,1;17,1
 ;;Oude Westen;22,3;19,5;22,1;21,2;15,1
 ;;Cool/Nieuwe Werk/Dijkzigt;29,9;20,6;23,2;25,1;19,6
