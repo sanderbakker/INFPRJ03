@@ -225,7 +225,7 @@ public class GraphFrameV2 extends Fragment implements AdapterView.OnItemSelected
 
                         }  catch (JSONException ex){}
                         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-                        if(hoodSelector != 27) {
+                        if(hoodSelector != 26) {
 
                             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
                                     new DataPoint(1, (100 - ((100 / (calculateMax(2006) + (calculateAvg(2006) /2)) * hoodDataList.get(0).getPercentage()))) / 20),
