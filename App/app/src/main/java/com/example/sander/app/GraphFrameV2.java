@@ -113,7 +113,11 @@ public class GraphFrameV2 extends Fragment implements AdapterView.OnItemSelected
                                 new DataPoint(3, 17.5),
                                 new DataPoint(4, 18.0),
                                 new DataPoint(5, 14.0)
-                                //tijdelijke lijn nog aanpassen
+                                /* new DataPoint(1, 3),
+                                new DataPoint(2, 3),
+                                new DataPoint(3, 3),
+                                new DataPoint(4, 3),
+                                new DataPoint(5, 3)*/
                         });
 
                         // set manual x bounds

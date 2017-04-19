@@ -116,11 +116,16 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                         });
 
                         LineGraphSeries<DataPoint> average = new LineGraphSeries<>(new DataPoint[]{
-                                new DataPoint(1, 16.3),
+                                /*new DataPoint(1, 16.3),
                                 new DataPoint(2, 16.4),
                                 new DataPoint(3, 17.5),
                                 new DataPoint(4, 17.9),
-                                new DataPoint(5, 16.8)
+                                new DataPoint(5, 16.8) */
+                                new DataPoint(1, 3),
+                                new DataPoint(2, 3),
+                                new DataPoint(3, 3),
+                                new DataPoint(4, 3),
+                                new DataPoint(5, 3)
                         });
 
                         // set manual x bounds
