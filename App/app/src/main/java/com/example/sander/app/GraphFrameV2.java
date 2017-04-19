@@ -108,6 +108,7 @@ public class GraphFrameV2 extends Fragment implements AdapterView.OnItemSelected
                                 //new DataPoint(12, 0)
                         });
                         LineGraphSeries<DataPoint> average = new LineGraphSeries<>(new DataPoint[]{
+<<<<<<< HEAD
                                 new DataPoint(1, 18.5),
                                 new DataPoint(2, 16.5),
                                 new DataPoint(3, 17.5),
@@ -118,6 +119,14 @@ public class GraphFrameV2 extends Fragment implements AdapterView.OnItemSelected
                                 new DataPoint(3, 3),
                                 new DataPoint(4, 3),
                                 new DataPoint(5, 3)*/
+=======
+                                new DataPoint(1, 16.2),
+                                new DataPoint(2, 15.5),
+                                new DataPoint(3, 15.2),
+                                new DataPoint(4, 15.9),
+                                new DataPoint(5, 13.9)
+                                //tijdelijke lijn nog aanpassen
+>>>>>>> origin/master
                         });
 
                         // set manual x bounds
