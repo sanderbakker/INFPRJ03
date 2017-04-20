@@ -262,9 +262,9 @@ public class GraphFrameV2 extends Fragment implements AdapterView.OnItemSelected
                                     Toast.makeText(getActivity(), "Punt " + dataPoint, Toast.LENGTH_SHORT).show();
                                 }
                             });
-                            series.setTitle("Grade per year");
+                            series.setTitle("Cijfer per jaar");
                             series.setAnimated(true);
-                            average.setTitle("Final grade");
+                            average.setTitle("Gemiddelde cijfer");
                             average.setAnimated(true);
                             average.setColor(Color.argb(255, 0, 51, 153));
                             average.setThickness(5);
