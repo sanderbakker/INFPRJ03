@@ -271,8 +271,9 @@ public class GraphFrame extends Fragment implements AdapterView.OnItemSelectedLi
                                     Toast.makeText(getActivity(), "Punt " + dataPoint, Toast.LENGTH_SHORT).show();
                                 }
                             });
-                            series.setTitle("%");
+                            series.setTitle("Grade per year");
                             series.setAnimated(true);
+                            average.setTitle("Final grade");
                             average.setAnimated(true);
                             average.setColor(Color.argb(255, 0, 51, 153));
                             average.setThickness(7);
