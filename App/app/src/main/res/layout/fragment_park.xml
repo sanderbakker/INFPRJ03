@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_local_parking_black_24dp"/>
+    <TextView
+        android:id="@+id/name_info"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/code_info"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+
+        />
+    <TextView
+        android:id="@+id/spots_info"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+
+        />
+    <TextView
+        android:id="@+id/distance_info"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:id="@+id/cPoints_info"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="25dp"
+
+        />
+    <TextView
+        android:id="@+id/location_info"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+
+        />
+    <TextView
+        android:id="@+id/address_info"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+
+        />
+    <TextView
+        android:id="@+id/zipcode_info"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="25dp"
+        />
+
+</LinearLayout>

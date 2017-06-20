@@ -1,10 +1,13 @@
 package com.example.sander.app;
 
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,14 +17,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.LocationSource;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.vision.Frame;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static com.example.sander.app.R.id.map;
 
 public class MainActivity extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,6 +56,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        FragmentManager FragmentManager = getFragmentManager();
+        FragmentManager.beginTransaction().replace(R.id.content_frame, new MainFrame()).commit();
+
+
     }
 
     @Override
@@ -62,6 +88,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -73,24 +101,34 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentManager FragementManager = getFragmentManager();
+        FragmentManager FragmentManager = getFragmentManager();
         if (id == R.id.nav_home) {
-            //moet veranderd worden
-            Intent i = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(i);
+            //Intent i = new Intent(MainActivity.this, MainActivity.class);
+            //startActivity(i);
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new MainFrame()).commit();
         } else if (id == R.id.nav_maps) {
             // Adds the frame when pressing the maps button
-            FragementManager.beginTransaction().replace(R.id.content_frame, new GoogleMaps()).commit();
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new GoogleMaps()).commit();
         }
-
-          else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        else if(id == R.id.nav_view){
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new RecycleFrame()).commit();
+        }
+        else if(id == R.id.nav_graph){
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new GraphFrame()).commit();
+        }
+        else if(id == R.id.nav_graphv2){
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new GraphFrameV2()).commit();
+        }
+        else if(id == R.id.nav_list){
+            FragmentManager.beginTransaction().replace(R.id.content_frame, new ListFrame()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
 }
